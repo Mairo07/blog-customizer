@@ -29,14 +29,14 @@ export const ArticleParamsForm: React.FC<ArticleParamsFormProps> = ({
 	articleState,
 	setArticleState,
 }) => {
-	const [isOpen, setIsOpen] = useState(false);
+	const [isMenuOpen, setIsMenuOpen] = useState(false);
 	const [formState, setFormState] = useState(articleState);
 	const rootRef = useRef<HTMLDivElement>(null);
 
 	useOutsideClickClose({
-		isOpen,
+		isOpen: isMenuOpen,
 		rootRef,
-		onChange: setIsOpen,
+		onChange: setIsMenuOpen,
 	});
 
 	const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -62,16 +62,16 @@ export const ArticleParamsForm: React.FC<ArticleParamsFormProps> = ({
 	return (
 		<>
 			<ArrowButton
-				isOpen={isOpen}
+				isOpen={isMenuOpen}
 				onClick={() => {
-					setIsOpen(!isOpen);
+					setIsMenuOpen(!isMenuOpen);
 				}}
 			/>
 			<aside
 				ref={rootRef}
 				className={clsx({
 					[styles.container]: true,
-					[styles.container_open]: isOpen,
+					[styles.container_open]: isMenuOpen,
 				})}>
 				<form
 					className={styles.form}
